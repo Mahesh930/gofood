@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+header {
+  z-index: 10001 !important;
+}
+.shadow-full-dark {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 10px 15px rgba(0, 0, 0, 0.2), 0 20px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+.section-container {
+  @apply max-w-screen-2xl container mx-auto xl:px-24 px-4;
+}
+
+.subtitle {
+  @apply text-red uppercase tracking-wide font-medium text-lg;
+}
+
+.title {
+  @apply text-4xl md:text-5xl font-bold my-2 md:leading-snug leading-snug;
+}
+.heartStar{
+  border-radius: 0px 28px 0px 28px;
+}
+
+.active{
+  color: rgb(225, 225, 243);
+  background:blue;
+  border-radius: 5px;
+}
