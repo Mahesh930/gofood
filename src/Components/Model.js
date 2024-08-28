@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { IoLogoGoogle, IoLogoGithub } from "react-icons/io";
 import { FaInstagram } from "react-icons/fa";
-import { useForm } from "react-hook-form"
+import { useForm, } from "react-hook-form"
 import { AuthContext } from '../context/Auth';
 
 const Model = () => {
@@ -13,16 +13,39 @@ const Model = () => {
         formState: { errors },
     } = useForm()
 
-    const [signupWithGmail] = useContext(AuthContext);
-    console.log(signupWithGmail);
-    
+    const { signupWithGmail, login } = useContext(AuthContext);
+    // console.log(signupWithGmail);
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const onSubmit = (data) => console.log(data)
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/"
+
+
+    const onSubmit = (data) => {
+        const email = data.email;
+        const password = data.password;
+        // console.log(email,password);
+        login(email, password).then((result) => {
+
+            const user = result.user;
+            // alert("Login Successfull!!");
+            document.getElementById('my_modal_5').close()
+            navigate(from, { replace: true });
+
+        }).catch((error) => {
+            const msg = error.message;
+            setErrorMessage("Provide a correct email and password")
+        })
+
+    }
 
     const handleLogin = () => {
         signupWithGmail().then((result) => {
             const user = result.user;
             alert("Login Successfull!!");
+            document.getElementById('my_modal_5').close()
         }).catch((error) => {
             console.error("Error");
         });
@@ -40,19 +63,25 @@ const Model = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="email" className="input input-bordered text-white" required  {...register("Email")} />
+                                <input type="email" placeholder="email" className="input input-bordered text-white" required  {...register("email")} />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" placeholder="password" className="input text-white input-bordered" required  {...register("Password")} />
+                                <input type="password" placeholder="password" className="input text-white input-bordered" required  {...register("password")} />
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                             </div>
+                            {/* Error Message */}
+                            {
+                                errorMessage ? <p className='text-red text-xs '>{errorMessage}</p> : ""
+                            }
+
                             <div className="form-control mt-6">
-                                <input type='submit' value='Login' className="btn btn-primary" />
+                                <input type='submit' value='Login' className="btn btn-primary"
+                                />
                                 <div className='text-center'> <br />Or <br /></div>
                             </div>
 

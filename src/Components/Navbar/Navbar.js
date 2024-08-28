@@ -3,15 +3,15 @@ import "./Navbar.css"
 import { FaRegUser } from "react-icons/fa";
 import Model from '../Model';
 import { AuthContext } from '../../context/Auth';
+import Profile from '../Profile';
 
 const Navbar = () => {
 
     const {user} = useContext(AuthContext);
-    console.log(user);
-    
-
-
+    // console.log(user);
     const [isSticky, setSticky] = useState(false);
+
+    
     //Handling the scroll
     useEffect(() => {
         const handleScroll = () => {
@@ -139,11 +139,20 @@ const Navbar = () => {
                             <span className="badge badge-sm indicator-item">8</span>
                         </div>
                     </div>
+                    {/* Login button */}
+                        {
+                            user? <>
+                                <Profile user={user}/>
+                                </>
+                            :  <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#1d4ed8] rounded-full px-6 text-white flex items-center gap-2">
+                                                        <FaRegUser />Login
+                                                        </button>
+                        }
 
-                    <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#1d4ed8] rounded-full px-6 text-white flex items-center gap-2">
+                    {/* <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-[#1d4ed8] rounded-full px-6 text-white flex items-center gap-2">
                         <FaRegUser />
                         Login
-                    </button>
+                    </button> */}
                     <Model/>
                 </div>
             </div>
