@@ -16,7 +16,7 @@ const Menu = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/menu.json');
+                const response = await fetch('http://localhost:4000/menu');
                 const data = await response.json();
                 // console.log(data);
                 setMenu(data);
@@ -71,10 +71,10 @@ const Menu = () => {
         setCurrentPage(1);
     };
 
-    const indexOfLastItem = currentPage+itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem-itemsPerPage;
+    const indexOfLastItem = currentPage + itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
-    const paginate = (pageNumber)=>{
+    const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
 
@@ -135,10 +135,10 @@ const Menu = () => {
                 {/* pagination */}
                 <div className='flex justify-center m-8'>
                     {
-                        Array.from({length:Math.ceil(filteredItems.length/itemsPerPage)}).map((_, index)=>(
-                            <button key={index+1} onClick={() => paginate(index+1)} 
-                            className={`mx-2 px-2 py-1 rounded-full ${currentPage===index+1 ? "bg-blue":"bg-gray-200 text-black"}`}>
-                                {index+1}
+                        Array.from({ length: Math.ceil(filteredItems.length / itemsPerPage) }).map((_, index) => (
+                            <button key={index + 1} onClick={() => paginate(index + 1)}
+                                className={`mx-2 px-2 py-1 rounded-full ${currentPage === index + 1 ? "bg-blue" : "bg-gray-200 text-black"}`}>
+                                {index + 1}
                             </button>
                         ))
                     }

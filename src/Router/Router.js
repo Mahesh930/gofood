@@ -3,6 +3,9 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home.js";
 import Menu from "../Pages/Shop/Menu.js";
 import Signup from "../Components/Signup.js";
+import PrivateRouter from "../Layout/PrivateRouter/PrivateRouter.js";
+import UpdateProfile from "../Pages/Dashboard/UpdateProfile.js";
+import CartPage from "../Pages/Shop/CartPage.js";
 
 const router = createBrowserRouter([
     {
@@ -11,13 +14,21 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home/>
-            },{
+                element: <Home />
+            }, {
                 path: "/menu",
-                element: <Menu/>
-            },{
+                element: <PrivateRouter><Menu /></PrivateRouter>
+            }, {
                 path: "/signup",
-                element: <Signup/>
+                element: <Signup />
+            },
+            {
+                path: "/update-profile",
+                element: <UpdateProfile />
+            },
+            {
+                path: "/cart-page",
+                element: <CartPage />
             }
         ]
     }

@@ -13,7 +13,9 @@ const Main = () => {
   return (
     <div>
       {
-        loading ? <LodingSpinner/> : <div>
+        loading ? <LodingSpinner/> : 
+        <div>
+          {" "}
           <Navbar />
           <div className='min-h-screen'>
             <Outlet />
