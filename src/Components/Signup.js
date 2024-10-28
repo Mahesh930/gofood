@@ -8,6 +8,7 @@ import { AuthContext } from '../context/Auth';
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { createUser } = useContext(AuthContext);
+    const {loginWithGmail}= useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
@@ -78,8 +79,8 @@ const Signup = () => {
 
                 {/* Login using Social Media */}
                 <div className='text-center'>
-                    <button className="btn btn-circle btn-outline m-2 "  >
-                        <IoLogoGoogle />
+                    <button className="btn btn-circle btn-outline m-2 " onClick={loginWithGmail} >
+                        <IoLogoGoogle  />
                     </button>
                     <button className="btn btn-circle btn-outline m-2">
                         <IoLogoGithub />
